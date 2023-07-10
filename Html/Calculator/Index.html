@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+        #calculator {
+  width: 400px;
+  height: 500px;
+  margin: 100px auto;
+  border: 1px solid #000;
+}
+
+.display {
+  width: 100%;
+  height: 200px;
+  background-color: #ddd;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: right;
+  font-size: 2em;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+button {
+  width: 100px;
+  height: 80px;
+  background-color: #fff;
+  border: 1px solid #000;
+  font-size: 2em;
+}
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="calculator">
+  <div class="display">
+    <p id="expression"></p>
+    <p id="result"></p>
+  </div>
+  <div class="buttons">
+    <button id="clear">C</button>
+    <button id="backspace">&larr;</button>
+    <button id="divide">/</button>
+    <button id="seven">7</button>
+    <button id="eight">8</button>
+    <button id="nine">9</button>
+    <button id="multiply">*</button>
+    <button id="four">4</button>
+    <button id="five">5</button>
+    <button id="six">6</button>
+    <button id="subtract">-</button>
+    <button id="one">1</button>
+    <button id="two">2</button>
+    <button id="three">3</button>
+    <button id="add">+</button>
+    <button id="zero">0</button>
+    <button id="decimal">.</button>
+    <button id="equals">=</button>
+  </div>
+</div>
+
+<script>
+const expressionDisplay = document.querySelector('#expression');
+const resultDisplay = document.querySelector('#result');
+console.log(resultDisplay)
+const buttons = document.querySelectorAll('button');
+
+let expression = '';
+
+for (const button of buttons) {
+  button.addEventListener('click', function() {
+    switch (button.id) {
+      case 'clear':
+        expression = '';
+        expressionDisplay.textContent = '';
+        resultDisplay.textContent = '';
+        break;
+      case 'backspace':
+        expression = expression.slice(0, -1);
+        expressionDisplay.textContent = expression;
+        break;
+      case 'equals':
+        try {
+          resultDisplay.textContent = eval(expression);
+          console.log(eval(expression))
+        } catch (error) {
+          resultDisplay.textContent = 'Error';
+        }
+        break;
+      default:
+        expression += button.textContent;
+        expressionDisplay.textContent = expression;
+        console.log(expression)
+        break;
+    }
+  });
+}
+
+</script>
+</body>
+</html>
